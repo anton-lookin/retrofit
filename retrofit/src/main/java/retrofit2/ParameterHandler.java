@@ -360,4 +360,21 @@ abstract class ParameterHandler<T> {
       builder.setBody(body);
     }
   }
+
+  static final class Model<T> extends ParameterHandler<T> {
+
+    Model() {
+      String message = "For test purpose only";
+    }
+
+    @Override
+    void apply(RequestBuilder builder, @Nullable T value) {
+      if (value == null) {
+        throw new IllegalArgumentException("RequestModel parameter value must not be null.");
+      }
+
+      RequestModel requestModel = (RequestModel) value;
+      requestModel.fulfill(builder);
+    }
+  }
 }

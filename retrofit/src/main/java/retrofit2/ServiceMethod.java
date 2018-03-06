@@ -43,6 +43,7 @@ import retrofit2.http.HEAD;
 import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.Model;
 import retrofit2.http.Multipart;
 import retrofit2.http.OPTIONS;
 import retrofit2.http.PATCH;
@@ -717,6 +718,8 @@ final class ServiceMethod<R, T> {
         }
         gotBody = true;
         return new ParameterHandler.Body<>(converter);
+      } else if (annotation instanceof Model) {
+        return new ParameterHandler.Model<>();
       }
 
       return null; // Not a Retrofit annotation.
